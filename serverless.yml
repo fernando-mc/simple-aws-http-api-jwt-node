@@ -1,0 +1,28 @@
+org: yourorg
+app: yourapp
+service: http-api-python-auth-simple
+
+provider:
+  name: aws
+  runtime: python3.8
+  httpApi:
+    authorizers:
+      serviceAuthorizer:
+        identitySource: $request.header.Authorization
+        issuerUrl: https://cognito-idp.us-west-2.amazonaws.com/us-east-1_ycA8dZEBo
+        audience: 5i1viltvr4itk0ebrhmfq7mshu
+functions:
+  getProfileInfo:
+    handler: profile.get
+    events:
+      - httpApi:
+            method: GET
+            path: /user/profile
+            authorizer: serviceAuthorizer
+  createProfileInfo:
+    handler: profile.post
+    events:
+      - httpApi:
+            method: POST
+            path: /user/profile
+            authorizer: serviceAuthorizer
