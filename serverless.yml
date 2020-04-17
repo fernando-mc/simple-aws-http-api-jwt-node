@@ -4,7 +4,7 @@ service: http-api-node-auth-simple
 
 provider:
   name: aws
-  runtime: node12.x
+  runtime: nodejs12.x
   httpApi:
     authorizers:
       serviceAuthorizer:
